@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 from bokeh.layouts import gridplot
 from bokeh.plotting import figure, show, output_file
@@ -6,13 +7,15 @@ from bokeh.plotting import figure, show, output_file
 def datetime(x):
     return np.array(x, dtype=np.datetime64)
 
+stocks = pd.read_csv('WIKI-PRICES.csv')
+ZUMZ = stocks[stocks['ticker']=='ZUMZ']
 
 def stocks(closing=True, adjusted_closing=True, opening=True):
-    adj_close = np.array(AAPL['adj_close'])
-    close = np.array(AAPL['close'])
-    std_open = np.array(AAPL['open'])
-    aapl_dates = np.array(AAPL['date'], dtype=np.datetime64)
-    p2 = figure(x_axis_type="datetime", title="AAPL One-Month Average")
+    adj_close = np.array(ZUMZ['adj_close'])
+    close = np.array(ZUMZ['close'])
+    std_open = np.array(ZUMZ['open'])
+    aapl_dates = np.array(ZUMZ['date'], dtype=np.datetime64)
+    p2 = figure(x_axis_type="datetime", title="ZUMZ Stock Prices")
     p2.grid.grid_line_alpha = 0
     p2.xaxis.axis_label = 'Date'
     p2.yaxis.axis_label = 'Price'
